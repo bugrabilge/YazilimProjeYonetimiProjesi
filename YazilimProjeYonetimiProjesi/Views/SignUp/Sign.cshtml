@@ -12,39 +12,39 @@
 
 @using (Html.BeginForm())
 {
-    <div class="registration">
+    <div class="registration", style="width:contain">
         <h1>👋 Welcome!</h1>
         <hr>
-        <form>
+        <form style="width:auto">
             <div>
                 <h4>👾 Sign Up</h4>
             </div>
 
-            <div>
+            <div style="width: auto">
                 @Html.LabelFor(model => model.Name, new { @class = "control-label", style = "color: #555; font-weight: bold;" })
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", style = "background-color: #f2f2f2; border-color: #ddd; color: #555; padding: 6px; border-radius: 5px;" }})
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", style = "background-color: #f2f2f2; border-color: #ddd; color: #555; padding: 6px; border-radius: 5px;"  }})
                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger", style = "font-size: 12px; margin-top: 5px;" })
                 <div class="help-block" style="color: #777; font-size: 12px;">Please enter your name</div>
             </div>
-            <div>
+            <div style="width: auto">
                 @Html.LabelFor(model => model.Surname, new { @class = "control-label", style = "color: #555; font-weight: bold;" })
                 @Html.EditorFor(model => model.Surname, new { htmlAttributes = new { @class = "form-control", style = "background-color: #f2f2f2; border-color: #ddd; color: #555; padding: 6px; border-radius: 5px;" }})
                 @Html.ValidationMessageFor(model => model.Surname, "", new { @class = "text-danger", style = "font-size: 12px; margin-top: 5px;" })
                 <div class="help-block" style="color: #777; font-size: 12px;">Please enter your surname</div>
             </div>
-            <div>
+            <div style="width: auto">
                 @Html.LabelFor(model => model.UserName, new { @class = "control-label", style = "color: #555; font-weight: bold;" })
                 @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", style = "background-color: #f2f2f2; border-color: #ddd; color: #555; padding: 6px; border-radius: 5px;" }})
                 @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger", style = "font-size: 12px; margin-top: 5px;" })
                 <div class="help-block" style="color: #777; font-size: 12px;">Please enter your username</div>
             </div>
-            <div>
+            <div style="width: auto">
                 @Html.LabelFor(model => model.Password, new { @class = "control-label", style = "color: #555; font-weight: bold;" })
-                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", style = "background-color: #f2f2f2; border-color: #ddd; color: #555; padding: 6px; border-radius: 5px;" }})
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", style = "background-color: #f2f2f2; border-color: #ddd; color: #555; padding: 6px; border-radius: 5px; width" }})
                 @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger", style = "font-size: 12px; margin-top: 5px;" })
                 <div class="help-block" style="color: #777; font-size: 12px;">Please enter your password</div>
             </div>
-            <div>
+            <div style="width: auto">
                 @Html.LabelFor(model => model.UserType, new { @class = "control-label", style = "color: #555; font-weight: bold;" })
                 @Html.DropDownList("UserType",
             new List<SelectListItem> {
@@ -60,7 +60,7 @@
             Text="Officer",
             Value="3",
             },
-            }, new { @class = "form-control", style = "background-color: #f2f2f2; border-color: #ddd; color: #555; padding: 6px; border-radius: 5px;" })
+            }, new { @class = "form-control", style = "background-color: #f2f2f2; border-color: #ddd; color: #555; padding: 6px; border-radius: 5px;"})
                 @Html.ValidationMessageFor(model => model.UserType, "", new {@class = "text-danger",  style = "font-size: 12px; margin-top: 5px;"})
                 <div class="help-block" style="color: #777; font-size: 12px;">Please select your user type</div>
             </div>
