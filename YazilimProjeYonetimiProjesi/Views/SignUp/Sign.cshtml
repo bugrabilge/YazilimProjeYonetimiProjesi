@@ -1,74 +1,76 @@
 ﻿@model EntityLayer.Concrete.Users
-
 @{
     ViewData["Title"] = "SignUp";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/design.css">
+<link rel="stylesheet" href="~/css/site.css" />
 <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+
 
 @using (Html.BeginForm())
 {
-    <div class="form-horizontal">
-        <h4>Sign Up</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
-        <div class="form-group">
-            @Html.LabelFor(model => model.Name, new { htmmlAttributes = new{ @class = "control-label col-md-2"}})
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Name, new {htmlAttributes = new {@class = "form-control"} })
-                @Html.ValidationMessageFor(model => model.Name, "", new {@class = "text-danger"})
+    <div class="registration">
+        <h1>👋 Welcome!</h1>
+        <hr>
+        <form>
+            <div>
+                <h4>👾 Sign Up</h4>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Surname, new { htmmlAttributes = new{ @class = "control-label col-md-2"}})
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Surname, new {htmlAttributes = new {@class = "form-control"} })
-                @Html.ValidationMessageFor(model => model.Surname, "", new {@class = "text-danger"})
+            <div>
+                @Html.LabelFor(model => model.Name, new { @class = "control-label", style = "color: #555; font-weight: bold;" })
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", style = "background-color: #f2f2f2; border-color: #ddd; color: #555; padding: 6px; border-radius: 5px;" }})
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger", style = "font-size: 12px; margin-top: 5px;" })
+                <div class="help-block" style="color: #777; font-size: 12px;">Please enter your name</div>
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.UserName, new { htmmlAttributes = new{ @class = "control-label col-md-2"}})
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.UserName, new {htmlAttributes = new {@class = "form-control"} })
-                @Html.ValidationMessageFor(model => model.UserName, "", new {@class = "text-danger"})
+            <div>
+                @Html.LabelFor(model => model.Surname, new { @class = "control-label", style = "color: #555; font-weight: bold;" })
+                @Html.EditorFor(model => model.Surname, new { htmlAttributes = new { @class = "form-control", style = "background-color: #f2f2f2; border-color: #ddd; color: #555; padding: 6px; border-radius: 5px;" }})
+                @Html.ValidationMessageFor(model => model.Surname, "", new { @class = "text-danger", style = "font-size: 12px; margin-top: 5px;" })
+                <div class="help-block" style="color: #777; font-size: 12px;">Please enter your surname</div>
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Password, new { htmmlAttributes = new{ @class = "control-label col-md-2"}})
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Password, new {htmlAttributes = new {@class = "form-control"} })
-                @Html.ValidationMessageFor(model => model.Password, "", new {@class = "text-danger"})
+            <div>
+                @Html.LabelFor(model => model.UserName, new { @class = "control-label", style = "color: #555; font-weight: bold;" })
+                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", style = "background-color: #f2f2f2; border-color: #ddd; color: #555; padding: 6px; border-radius: 5px;" }})
+                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger", style = "font-size: 12px; margin-top: 5px;" })
+                <div class="help-block" style="color: #777; font-size: 12px;">Please enter your username</div>
             </div>
-        </div>
-
-        <br />
-
-        <div class="form-group" id="typeuser">
-            @Html.DropDownList("UserType",
-        new List<SelectListItem> {
-        new SelectListItem {
-        Text="Admin",
-        Value = "1",
-        },
-        new SelectListItem {
-        Text="Moderator",
-        Value="2",
-        },
-        new SelectListItem {
-        Text="Officer",
-        Value="3",
-        },
-        })
-        </div>
-        <hr />
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create My Account" class="btn btn-outline-secondary" />
+            <div>
+                @Html.LabelFor(model => model.Password, new { @class = "control-label", style = "color: #555; font-weight: bold;" })
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", style = "background-color: #f2f2f2; border-color: #ddd; color: #555; padding: 6px; border-radius: 5px;" }})
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger", style = "font-size: 12px; margin-top: 5px;" })
+                <div class="help-block" style="color: #777; font-size: 12px;">Please enter your password</div>
             </div>
-        </div>
+            <div>
+                @Html.LabelFor(model => model.UserType, new { @class = "control-label", style = "color: #555; font-weight: bold;" })
+                @Html.DropDownList("UserType",
+            new List<SelectListItem> {
+            new SelectListItem {
+            Text="Admin",
+            Value = "1",
+            },
+            new SelectListItem {
+            Text="Moderator",
+            Value="2",
+            },
+            new SelectListItem {
+            Text="Officer",
+            Value="3",
+            },
+            }, new { @class = "form-control", style = "background-color: #f2f2f2; border-color: #ddd; color: #555; padding: 6px; border-radius: 5px;" })
+                @Html.ValidationMessageFor(model => model.UserType, "", new {@class = "text-danger",  style = "font-size: 12px; margin-top: 5px;"})
+                <div class="help-block" style="color: #777; font-size: 12px;">Please select your user type</div>
+            </div>
+
+            <div class="pure-material-button-contained">
+                <div class="col-md-offset-2 col-md-10">
+                    <button type="submit" class="btn btn-warning">Create My Account</button>
+                </div>
+            </div>
+        </form>
+
     </div>
 }
