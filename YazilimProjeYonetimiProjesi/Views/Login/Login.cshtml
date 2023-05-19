@@ -26,7 +26,7 @@
         <div style="width: auto">
             @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2", style = "color: #555; font-weight: bold;"  })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", style = "background-color: #f2f2f2; border-color: #ddd; color: #555; padding: 6px; border-radius: 5px;" } })
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control",@type = "password", style = "background-color: #f2f2f2; border-color: #ddd; color: #555; padding: 6px; border-radius: 5px;" } })
                 @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger"  })
             </div>
         </div>
