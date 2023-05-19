@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using YazilimProjeYonetimiProjesi.Models;
+using System.Security.Claims;
+using System.Security.Principal;
 
 namespace YazilimProjeYonetimiProjesi.Controllers
 {
@@ -29,19 +31,27 @@ namespace YazilimProjeYonetimiProjesi.Controllers
         {
             using (var context = new Context())
             {
-                var UnEncryptedUser = context.Users.FirstOrDefault(x => x.UserName== user.UserName);
-                UnEncryptedUser.Password = _usersService.UnencryptePassword(UnEncryptedUser.Password);
-                var loginUser = context.Users.FirstOrDefault(x => x.UserName == user.UserName && UnEncryptedUser.Password == user.Password);
+                Users? loginUser = null;
+                var UnEncryptedUser = _usersService.GetUserByUsername(user);
+
+                if (UnEncryptedUser != null)
+                {
+                    UnEncryptedUser.Password = _usersService.UnencryptePassword(UnEncryptedUser.Password);
+                    loginUser = context.Users.FirstOrDefault(x => x.UserName == user.UserName && UnEncryptedUser.Password == user.Password);
+                }
 
                 if (loginUser != null)
                 {
                     ViewBag.Log = "Login Succeeded";
                     UserInfo.UserType = loginUser.UserType;
+                    ClaimsIdentity identity = Constants.SetRolesAndAuthenticate(loginUser);
+                    var principal = new ClaimsPrincipal(identity);
+                    var login = HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+
                     return RedirectToAction("Index", "Dashboard");
                 }
                 ViewBag.Log = "Access Denied";
                 return View();
-
             }
         }
 
@@ -50,6 +60,11 @@ namespace YazilimProjeYonetimiProjesi.Controllers
             HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             UserInfo.UserType = 0;
             return RedirectToAction("Login", "Login");
+        }
+
+        public IActionResult AccessDeniedPage()
+        {
+            return View();
         }
     }
 

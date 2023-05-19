@@ -14,6 +14,7 @@ namespace BusinessLayer.Absract
         void UserUpdate(Users users);
         List<Users> GetAllList();
         Users GetByID(int id);
+        Users GetUserByUsername(Users users);
         string EncryptePassword(string passwordToEncrpte);
         string UnencryptePassword(string encryptedPassword);
     }

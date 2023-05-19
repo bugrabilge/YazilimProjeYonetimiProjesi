@@ -1,4 +1,8 @@
-﻿using System.ComponentModel;
+﻿using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using System.ComponentModel;
+using System.Security.Claims;
+using System.Security.Principal;
 using YazilimProjeYonetimiProjesi.Controllers;
 
 namespace YazilimProjeYonetimiProjesi
@@ -32,6 +36,31 @@ namespace YazilimProjeYonetimiProjesi
             }
 
             return returnValue;
+        }
+
+        public static ClaimsIdentity SetRolesAndAuthenticate(Users user)
+        {
+            string userRole = "";
+
+            switch (UserInfo.UserType)
+            {
+                case 1:
+                    userRole = "Admin";
+                    break;
+                case 2:
+                    userRole = "Moderator";
+                    break;
+                case 3:
+                    userRole = "Officer";
+                    break;
+            }
+
+            ClaimsIdentity identity = new ClaimsIdentity(new[] {
+            new Claim(ClaimTypes.Name, user.UserName),
+            new Claim(ClaimTypes.Role, userRole)
+            }, CookieAuthenticationDefaults.AuthenticationScheme);
+
+            return identity;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Absract;
 using DataAccessLayer.Abstract;
+using DataAccessLayer.Concrete;
 using EntityLayer.Concrete;
 using Microsoft.AspNetCore.DataProtection;
 using System;
@@ -44,6 +45,12 @@ namespace BusinessLayer.Concrete
         public void UserUpdate(Users users)
         {
             _usersDal.Update(users);
+        }
+
+        public Users GetUserByUsername(Users users)
+        {
+            var user = _usersDal.GetListAll().Find(x => x.UserName == users.UserName);
+            return user;
         }
 
         public string EncryptePassword(string passwordToEncrpte)
