@@ -1,41 +1,56 @@
-﻿<link rel="stylesheet" href="~/lib/bootstrap/dist/css/design.css">
-<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-
-@model EntityLayer.Concrete.Users
+﻿@model EntityLayer.Concrete.Users
 @{
     Layout = Constants.SetLayout();
 }
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
 
-    <div class="registration">
-        <h2>🤖 Please Login</h2>
-        <div>@ViewBag.Log</div>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div style="width: auto">
-            @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2", style = "color: #555; font-weight: bold; width:auto"  })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" , style = "background-color: #f2f2f2; border-color: #ddd; color: #555; padding: 6px; border-radius: 5px;"} })
-                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="/css/ui-login.css">
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="box">
+        <span class="borderLine"></span>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-horizontal">
+                <h2>Log in 🤖</h2>
+                <div style="color:#ffffff">@ViewBag.Log</div>
+                <div class="inputBox">
+                    @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+                    <div style="color:#ffffff">
+                        @Html.LabelFor(model => model.UserName, htmlAttributes: new {})
+                        <div>
+                            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <i></i>
+                </div>
+
+                <div class="inputBox">
+                    <div style="color:#ffffff">
+                        @Html.LabelFor(model => model.Password, htmlAttributes: new {})
+                        <div>
+                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", type = "password" } })
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <i></i>
+                </div>
+                <br>
+                <div>
+                    <input type="submit" value="Login" class="btn btn-success" />
+                </div>
             </div>
-        </div>
-
-        <div style="width: auto">
-            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2", style = "color: #555; font-weight: bold;"  })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control",@type = "password", style = "background-color: #f2f2f2; border-color: #ddd; color: #555; padding: 6px; border-radius: 5px;" } })
-                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger"  })
-            </div>
-        </div>
-
-
-        <div class="pure-material-button-contained">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Login" class="btn btn-success" />
-            </div>
-        </div>
+        }
     </div>
-}
+</body>
+</html>
